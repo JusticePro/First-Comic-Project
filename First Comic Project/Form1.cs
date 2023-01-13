@@ -67,21 +67,7 @@ namespace First_Comic_Project
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (spinnerEpisodeStart.Value > spinnerEpisodeEnd.Value)
-            {
-                MessageBox.Show("The start episode is higher than the end episode.");
-                return;
-            }
-
-            Cursor = Cursors.WaitCursor;
-            buttonProcessBulk.Enabled = false;
-
-            int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
-            progressBar.Maximum = episodeQuantity+1;
-
-            Thread thread = new Thread(new ThreadStart(processBulk));
-            thread.Start();
-
+            startOperation();
         }
 
         void setLabel(string text)
@@ -163,6 +149,27 @@ namespace First_Comic_Project
 
             SystemSounds.Beep.Play();
             Process.Start(getExportPath());
+        }
+
+        /*
+         * Operation Management
+         */
+        void startOperation()
+        {
+            if (spinnerEpisodeStart.Value > spinnerEpisodeEnd.Value)
+            {
+                MessageBox.Show("The start episode is higher than the end episode.");
+                return;
+            }
+
+            Cursor = Cursors.WaitCursor;
+            buttonProcessBulk.Enabled = false;
+
+            int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
+            progressBar.Maximum = episodeQuantity + 1;
+
+            Thread thread = new Thread(new ThreadStart(processBulk));
+            thread.Start();
         }
     }
 }
