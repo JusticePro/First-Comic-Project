@@ -26,17 +26,6 @@ namespace First_Comic_Project
             instance = this;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Cursor = Cursors.WaitCursor;
-            Image image = Gatherer.getComic((int)episodeIdSelector.Value);
-            image.Save(Path.Combine(getExportPath(), "Episode " + episodeIdSelector.Value + ".png"));
-
-            SystemSounds.Beep.Play();
-            Cursor = Cursors.Default;
-            //saveImage(image);
-        }
-
         void saveImage(Image image)
         {
             SaveFileDialog save = new SaveFileDialog();
@@ -74,51 +63,6 @@ namespace First_Comic_Project
             }
 
             return path;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Process.Start(Gatherer.webtoonURLPrefix + episodeIdSelector.Value);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            open.Filter = "PNG File (*.png)|*.png";
-
-            if (open.ShowDialog() == DialogResult.OK)
-            {
-                textBox1.Text = open.FileName;
-            }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                colorSelector.BackColor = colorDialog1.Color;
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(textBox1.Text))
-            {
-                MessageBox.Show("Select a path to the episode first.");
-                return;
-            }
-
-            Cursor = Cursors.WaitCursor;
-
-            // Get and save panels.
-            List<Image> images = Separator.separatePanels(Image.FromFile(textBox1.Text), colorDialog1.Color);
-            for (int i = 0; i < images.Count; i++)
-            {
-                Image image = images[i];
-                image.Save(Path.Combine(getExportPath(), "Panel " + i + ".png"));
-            }
-
-            Cursor = Cursors.Default;
-            SystemSounds.Beep.Play();
         }
 
         private void button4_Click(object sender, EventArgs e)
