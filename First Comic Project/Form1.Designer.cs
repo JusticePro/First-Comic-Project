@@ -32,11 +32,11 @@ namespace First_Comic_Project
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.urlBox = new System.Windows.Forms.TextBox();
             this.spinnerEpisodeEnd = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.spinnerEpisodeStart = new System.Windows.Forms.NumericUpDown();
+            this.urlBox = new System.Windows.Forms.TextBox();
             this.checkBoxSeparate = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.buttonProcessBulk = new System.Windows.Forms.Button();
@@ -69,14 +69,6 @@ namespace First_Comic_Project
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Panel Gathering";
-            // 
-            // urlBox
-            // 
-            this.urlBox.Location = new System.Drawing.Point(12, 6);
-            this.urlBox.Name = "urlBox";
-            this.urlBox.Size = new System.Drawing.Size(546, 20);
-            this.urlBox.TabIndex = 11;
-            this.urlBox.Text = "https://www.webtoons.com/en/sf/space-boy/ep-1/viewer?title_no=400&episode_no=";
             // 
             // spinnerEpisodeEnd
             // 
@@ -144,6 +136,14 @@ namespace First_Comic_Project
             0,
             0});
             // 
+            // urlBox
+            // 
+            this.urlBox.Location = new System.Drawing.Point(12, 6);
+            this.urlBox.Name = "urlBox";
+            this.urlBox.Size = new System.Drawing.Size(546, 20);
+            this.urlBox.TabIndex = 11;
+            this.urlBox.Text = "https://www.webtoons.com/en/sf/space-boy/ep-1/viewer?title_no=400&episode_no=";
+            // 
             // checkBoxSeparate
             // 
             this.checkBoxSeparate.AutoSize = true;
@@ -182,7 +182,7 @@ namespace First_Comic_Project
             this.groupBox2.Size = new System.Drawing.Size(546, 160);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Panel Seperating";
+            this.groupBox2.Text = "Panel Seperation";
             // 
             // label5
             // 
