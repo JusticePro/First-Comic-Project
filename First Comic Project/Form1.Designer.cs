@@ -215,9 +215,9 @@ namespace First_Comic_Project
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(331, 453);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(233, 13);
+            this.label4.Size = new System.Drawing.Size(237, 13);
             this.label4.TabIndex = 16;
-            this.label4.Text = "Created by JusticePro for the Spaceboy Fandub";
+            this.label4.Text = "Created by JusticePro for the Space Boy Fandub";
             // 
             // labelProgress
             // 
