@@ -19,7 +19,20 @@ namespace First_Comic_Project.Controls.Episode
 
         public IEnumerable<int> getEpisodes()
         {
-            return new int[2];
+            if (spinnerEpisodeStart.Value < spinnerEpisodeEnd.Value)
+            {
+                MessageBox.Show("End episode is larger than start episode");
+                return null;
+            }
+
+            int size = (int)(spinnerEpisodeEnd.Value - spinnerEpisodeStart.Value);
+            int[] range = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                range[i] = (int)spinnerEpisodeStart.Value + i;
+            }
+
+            return range;
         }
     }
 }
