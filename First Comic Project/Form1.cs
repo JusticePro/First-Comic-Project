@@ -1,4 +1,5 @@
-﻿using System;
+﻿using First_Comic_Project.Controls.Episode;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,8 @@ namespace First_Comic_Project
     {
         OpenFileDialog open = new OpenFileDialog();
         public static Form1 instance;
+
+        public UserControl episodeSelection;
 
         public Form1()
         {
@@ -78,7 +81,7 @@ namespace First_Comic_Project
             });
         }
 
-        void processBulk()
+        /*void processBulk()
         {
             int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
 
@@ -149,6 +152,19 @@ namespace First_Comic_Project
 
             SystemSounds.Beep.Play();
             Process.Start(getExportPath());
+        }*/
+
+        void setEpisodeControl(UserControl control)
+        {
+            if (!(control is EpisodeSelection))
+            {
+                throw new Exception("Control is not an episode selection.");
+            }
+
+            gatheringGroupBox.Controls.Add(control);
+            control.Location = new Point(3, 43);
+
+            episodeSelection = control;
         }
 
         /*
@@ -156,7 +172,7 @@ namespace First_Comic_Project
          */
         void startOperation()
         {
-            if (spinnerEpisodeStart.Value > spinnerEpisodeEnd.Value)
+            /*if (spinnerEpisodeStart.Value > spinnerEpisodeEnd.Value)
             {
                 MessageBox.Show("The start episode is higher than the end episode.");
                 return;
@@ -169,7 +185,25 @@ namespace First_Comic_Project
             progressBar.Maximum = episodeQuantity + 1;
 
             Thread thread = new Thread(new ThreadStart(processBulk));
-            thread.Start();
+            thread.Start();*/
+        }
+
+        private void episodeSelectionMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        void setupGatheringBox()
+        {
+            episodeSelectionMode.SelectedIndex = 0;
+
+            ControlRange controlRange = new ControlRange();
+            setEpisodeControl(controlRange);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            setupGatheringBox();
         }
     }
 }
