@@ -41,7 +41,7 @@ namespace First_Comic_Project
             return path;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonStart_Click(object sender, EventArgs e)
         {
             startOperation();
         }
@@ -62,7 +62,7 @@ namespace First_Comic_Project
             if (episodes != null)
             {
                 Cursor = Cursors.WaitCursor;
-                buttonProcessBulk.Enabled = false;
+                buttonStart.Enabled = false;
 
                 progressBar.Maximum = episodes.Count();
 
@@ -135,7 +135,7 @@ namespace First_Comic_Project
             {
                 progressBar.Value = 0;
 
-                buttonProcessBulk.Enabled = true;
+                buttonStart.Enabled = true;
                 Cursor = Cursors.Default;
             });
             setLabel("");

@@ -36,7 +36,7 @@ namespace First_Comic_Project
             this.urlBox = new System.Windows.Forms.TextBox();
             this.checkBoxSeparate = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.buttonProcessBulk = new System.Windows.Forms.Button();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.darkSpinner = new System.Windows.Forms.NumericUpDown();
@@ -101,15 +101,15 @@ namespace First_Comic_Project
             this.progressBar.Size = new System.Drawing.Size(552, 23);
             this.progressBar.TabIndex = 13;
             // 
-            // buttonProcessBulk
+            // buttonStart
             // 
-            this.buttonProcessBulk.Location = new System.Drawing.Point(12, 422);
-            this.buttonProcessBulk.Name = "buttonProcessBulk";
-            this.buttonProcessBulk.Size = new System.Drawing.Size(552, 23);
-            this.buttonProcessBulk.TabIndex = 14;
-            this.buttonProcessBulk.Text = "Process Bulk Gathering";
-            this.buttonProcessBulk.UseVisualStyleBackColor = true;
-            this.buttonProcessBulk.Click += new System.EventHandler(this.button4_Click);
+            this.buttonStart.Location = new System.Drawing.Point(12, 422);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(552, 23);
+            this.buttonStart.TabIndex = 14;
+            this.buttonStart.Text = "Process Bulk Gathering";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // groupBox2
             // 
@@ -175,7 +175,7 @@ namespace First_Comic_Project
             this.Controls.Add(this.labelProgress);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.buttonProcessBulk);
+            this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.gatheringGroupBox);
@@ -200,7 +200,7 @@ namespace First_Comic_Project
         public System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.CheckBox checkBoxSeparate;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Button buttonProcessBulk;
+        private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.NumericUpDown darkSpinner;
