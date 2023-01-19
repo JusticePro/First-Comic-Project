@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Episode\ControlSingle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Episode\ControlSingle.Designer.cs">
+      <DependentUpon>ControlSingle.cs</DependentUpon>
+    </Compile>
     <Compile Include="EpisodeSelection.cs" />
     <Compile Include="Controls\Episode\ControlRange.cs">
       <SubType>UserControl</SubType>
@@ -69,6 +75,9 @@
     <Compile Include="Separator.cs" />
     <EmbeddedResource Include="Controls\Episode\ControlRange.resx">
       <DependentUpon>ControlRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Episode\ControlSingle.resx">
+      <DependentUpon>ControlSingle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
