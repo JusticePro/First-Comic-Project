@@ -29,33 +29,6 @@ namespace First_Comic_Project
             instance = this;
         }
 
-        void saveImage(Image image)
-        {
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "PNG File (*.png)|*.png";
-
-            if (save.ShowDialog() == DialogResult.OK)
-            {
-                image.Save(save.FileName);
-            }
-        }
-
-        string getExportFolder()
-        {
-            FolderBrowserDialog folder = new FolderBrowserDialog();
-            folder.SelectedPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            folder.Description = "Export Folder";
-
-            if (folder.ShowDialog() == DialogResult.OK)
-            {
-                string path = folder.SelectedPath;
-                return path;
-            }
-
-            return null;
-        }
-
         string getExportPath()
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Export");
@@ -81,12 +54,28 @@ namespace First_Comic_Project
             });
         }
 
-        /*void processBulk()
+        #region Process Episodes
+        void startOperation()
         {
-            int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
+            IEnumerable<int> episodes = ((EpisodeSelection)episodeSelection).getEpisodes();
+
+            if (episodes != null)
+            {
+                Cursor = Cursors.WaitCursor;
+                buttonProcessBulk.Enabled = false;
+
+                progressBar.Maximum = episodes.Count();
+
+                Thread thread = new Thread(new ThreadStart(() => processBulk(episodes)));
+                thread.Start();
+            }
+        }
+
+        void processBulk(IEnumerable<int> episodes)
+        {
 
             // For each episode
-            for (int i = (int)spinnerEpisodeStart.Value; i <= spinnerEpisodeEnd.Value; i++)
+            foreach (int i in episodes)
             {
                 try
                 {
@@ -138,6 +127,7 @@ namespace First_Comic_Project
                     {
                         Directory.CreateDirectory(episodeDirectory);
                     }
+                    Debug.WriteLine("Failed episode " + i + ": " + e.StackTrace);
                 }
             }
 
@@ -152,7 +142,8 @@ namespace First_Comic_Project
 
             SystemSounds.Beep.Play();
             Process.Start(getExportPath());
-        }*/
+        }
+        #endregion
 
         void setEpisodeControl(UserControl control)
         {
@@ -165,27 +156,6 @@ namespace First_Comic_Project
             control.Location = new Point(3, 43);
 
             episodeSelection = control;
-        }
-
-        /*
-         * Operation Management
-         */
-        void startOperation()
-        {
-            /*if (spinnerEpisodeStart.Value > spinnerEpisodeEnd.Value)
-            {
-                MessageBox.Show("The start episode is higher than the end episode.");
-                return;
-            }
-
-            Cursor = Cursors.WaitCursor;
-            buttonProcessBulk.Enabled = false;
-
-            int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
-            progressBar.Maximum = episodeQuantity + 1;
-
-            Thread thread = new Thread(new ThreadStart(processBulk));
-            thread.Start();*/
         }
 
         private void episodeSelectionMode_SelectedIndexChanged(object sender, EventArgs e)
