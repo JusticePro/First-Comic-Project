@@ -12,9 +12,9 @@ namespace First_Comic_Project.Operations.Selectors
         bool isWhitespace(Color color);
     }
 
-    public class SeperatorUtils
+    class SeperatorUtils
     {
-        static bool isEqual(Color color1, Color color2)
+        public static bool isEqual(Color color1, Color color2)
         {
             if (color1.A != color2.A)
             {
