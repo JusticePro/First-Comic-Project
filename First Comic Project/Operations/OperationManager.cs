@@ -116,13 +116,17 @@ namespace First_Comic_Project.Operations
 
         void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
         {
+            // Create snapshost
+            var progressUpdate = onProgressUpdate;
+            var complete = onComplete;
+
             int episodeCount = episodes.Count();
 
             // For each episode
             foreach (int i in episodes)
             {
                 // Graphic update.
-                onProgressUpdate?.Invoke(this, new ProgressUpdateArgs("Gathering Episode #" + i, i, episodeCount));
+                form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Gathering Episode #" + i, i, episodeCount))));
 
                 Image episode = downloadEpisode(i);
 
@@ -130,7 +134,7 @@ namespace First_Comic_Project.Operations
                 if (separatorSelector != null)
                 {
                     // Graphic update.
-                    onProgressUpdate?.Invoke(this, new ProgressUpdateArgs("Separating the panels for Episode #" + i, i, episodeCount));
+                    form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Separating the panels for Episode #" + i, i, episodeCount))));
 
                     separatePanels(i, episode, separatorSelector);
                 }
@@ -138,7 +142,8 @@ namespace First_Comic_Project.Operations
             }
 
             // Graphic update.
-            onComplete?.Invoke(this, EventArgs.Empty);
+            form.BeginInvoke(new MethodInvoker(() => complete?.Invoke(this, EventArgs.Empty)));
+            Process.Start(getExportPath());
         }
 
     }
