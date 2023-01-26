@@ -55,7 +55,7 @@
     <Compile Include="Controls\Episode\ControlSingle.Designer.cs">
       <DependentUpon>ControlSingle.cs</DependentUpon>
     </Compile>
-    <Compile Include="EpisodeSelection.cs" />
+    <Compile Include="Operations\Selectors\EpisodeSelection.cs" />
     <Compile Include="Controls\Episode\ControlRange.cs">
       <SubType>UserControl</SubType>
     </Compile>
