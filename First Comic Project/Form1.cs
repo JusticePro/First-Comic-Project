@@ -34,18 +34,6 @@ namespace First_Comic_Project
             this.operationManager = new OperationManager(this);
         }
 
-        string getExportPath()
-        {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Export");
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            return path;
-        }
-
         private void buttonStart_Click(object sender, EventArgs e)
         {
             startOperation();

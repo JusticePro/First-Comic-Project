@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,13 +19,45 @@ namespace First_Comic_Project.Operations
             this.form = form;
         }
 
-        public void startOperation(IEnumerable<int> episodes)
+        public void startOperation(IEnumerable<int> episodes, bool doSeparate)
         {
-            Thread thread = new Thread(new ThreadStart(() => processBulk(episodes)));
+            Thread thread = new Thread(new ThreadStart(() => processBulk(episodes, doSeparate)));
             thread.Start();
         }
 
-        void processBulk(IEnumerable<int> episodes)
+        /// <summary>
+        /// This is the path to the export folder. If one doesn't exist, it will be created.
+        /// The export folder will be in the same folder as the executable.
+        /// [Folder of Executable]/Export
+        /// </summary>
+        /// <returns>Path to export folder.</returns>
+        string getExportPath()
+        {
+            // Path is "<Folder of Executable>/Export"
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Export");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return path;
+        }
+
+        Image downloadEpisode(int episodeId)
+        {
+            Image episode = Gatherer.getComic(episodeId);
+
+            if (episode == null)
+            {
+                return null;
+            }
+
+            episode.Save(Path.Combine(getExportPath(), "Episode #" + episodeId + ".png"));
+            return episode;
+        }
+
+        void processBulk(IEnumerable<int> episodes, bool doSeparate)
         {
 
             // For each episode
@@ -31,17 +66,9 @@ namespace First_Comic_Project.Operations
                 try
                 {
                     setLabel("Gathering Episode #" + i);
+                    Image episode = downloadEpisode(i);
 
-                    Image episode = Gatherer.getComic(i);
-
-                    if (episode == null)
-                    {
-                        continue;
-                    }
-
-                    episode.Save(Path.Combine(getExportPath(), "Episode #" + i + ".png"));
-
-                    if (checkBoxSeparate.Checked)
+                    if (doSeparate)
                     {
                         setLabel("Separating the panels for Episode #" + i);
 
