@@ -18,11 +18,22 @@ namespace First_Comic_Project.Operations
         /*
          * Events
          */
-        public delegate void OperationProgress(string label, int progressStatus, int progressMaximum);
-        public delegate void OperationComplete();
+        public struct ProgressUpdateArgs
+        {
+            public string label;
+            public int progressStatus;
+            public int progressMaximum;
 
-        public event OperationProgress onProgressUpdate;
-        public event OperationComplete onComplete;
+            public ProgressUpdateArgs(string label, int progressStatus, int progressMaximum)
+            {
+                this.label = label;
+                this.progressStatus = progressStatus;
+                this.progressMaximum = progressMaximum;
+            }
+        };
+
+        public event EventHandler<ProgressUpdateArgs> onProgressUpdate;
+        public event EventHandler<EventArgs> onComplete;
 
         private Form1 form;
 
@@ -111,7 +122,7 @@ namespace First_Comic_Project.Operations
             foreach (int i in episodes)
             {
                 // Graphic update.
-                onProgressUpdate?.Invoke("Gathering Episode #" + i, i, episodeCount);
+                onProgressUpdate?.Invoke(this, new ProgressUpdateArgs("Gathering Episode #" + i, i, episodeCount));
 
                 Image episode = downloadEpisode(i);
 
@@ -119,7 +130,7 @@ namespace First_Comic_Project.Operations
                 if (separatorSelector != null)
                 {
                     // Graphic update.
-                    onProgressUpdate?.Invoke("Separating the panels for Episode #" + i, i, episodeCount);
+                    onProgressUpdate?.Invoke(this, new ProgressUpdateArgs("Separating the panels for Episode #" + i, i, episodeCount));
 
                     separatePanels(i, episode, separatorSelector);
                 }
@@ -127,7 +138,7 @@ namespace First_Comic_Project.Operations
             }
 
             // Graphic update.
-            onComplete?.Invoke();
+            onComplete?.Invoke(this, EventArgs.Empty);
         }
 
     }

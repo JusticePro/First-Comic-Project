@@ -33,19 +33,26 @@ namespace First_Comic_Project
 
             // Setup Operation Manager
             this.operationManager = new OperationManager(this);
+
+            operationManager.onProgressUpdate += onProgressUpdate;
+        }
+
+        /// <summary>
+        /// Event triggered by OperationManager when progress is made.
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="progressStatus"></param>
+        /// <param name="progressMaximum"></param>
+        private void onProgressUpdate(object sender, OperationManager.ProgressUpdateArgs eventArgs)
+        {
+            labelProgress.Text = eventArgs.label;
+            progressBar.Maximum = eventArgs.progressMaximum;
+            progressBar.Value = eventArgs.progressStatus;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
             startOperation();
-        }
-
-        void setLabel(string text)
-        {
-            BeginInvoke((MethodInvoker)delegate ()
-            {
-                labelProgress.Text = text;
-            });
         }
 
         /// <summary>
