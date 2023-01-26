@@ -15,7 +15,17 @@ namespace First_Comic_Project.Operations
 {
     class OperationManager
     {
+        /*
+         * Events
+         */
+        public delegate void OperationProgress(string label, int progressStatus, int progressMaximum);
+        public delegate void OperationComplete();
+
+        public event OperationProgress onProgressUpdate;
+        public event OperationComplete onComplete;
+
         private Form1 form;
+
         public OperationManager(Form1 form)
         {
             this.form = form;
@@ -95,40 +105,30 @@ namespace First_Comic_Project.Operations
 
         void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
         {
+            int episodeCount = episodes.Count();
 
             // For each episode
             foreach (int i in episodes)
             {
-                setLabel("Gathering Episode #" + i);
+                // Graphic update.
+                onProgressUpdate?.Invoke("Gathering Episode #" + i, i, episodeCount);
+
                 Image episode = downloadEpisode(i);
 
                 // If the selector is null, then you don't separate.
                 if (separatorSelector != null)
                 {
-                    setLabel("Separating the panels for Episode #" + i);
+                    // Graphic update.
+                    onProgressUpdate?.Invoke("Separating the panels for Episode #" + i, i, episodeCount);
 
                     separatePanels(i, episode, separatorSelector);
                 }
 
-                BeginInvoke((MethodInvoker)delegate ()
-                {
-                    progressBar.Value++;
-                });
             }
 
-            BeginInvoke((MethodInvoker)delegate ()
-            {
-                progressBar.Value = 0;
-
-                buttonStart.Enabled = true;
-                Cursor = Cursors.Default;
-            });
-            setLabel("");
-
-            SystemSounds.Beep.Play();
-
-            // Open Folder
-            Process.Start(getExportPath());
+            // Graphic update.
+            onComplete?.Invoke();
         }
+
     }
 }
