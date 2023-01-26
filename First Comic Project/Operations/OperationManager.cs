@@ -35,6 +35,7 @@ namespace First_Comic_Project.Operations
         public event EventHandler<ProgressUpdateArgs> onProgressUpdate;
         public event EventHandler<EventArgs> onComplete;
 
+        // Form
         private Form1 form;
 
         public OperationManager(Form1 form)
@@ -42,6 +43,11 @@ namespace First_Comic_Project.Operations
             this.form = form;
         }
 
+        /// <summary>
+        /// Start an operation.
+        /// </summary>
+        /// <param name="episodes">List of episodes to process.</param>
+        /// <param name="separatorSelector">Standard of whitespace. Null if not separating.</param>
         public void startOperation(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
         {
             Thread thread = new Thread(new ThreadStart(() => processBulk(episodes, separatorSelector)));
@@ -67,6 +73,11 @@ namespace First_Comic_Project.Operations
             return path;
         }
 
+        /// <summary>
+        /// Download episode.
+        /// </summary>
+        /// <param name="episodeId">The url id of the episode</param>
+        /// <returns>Episode image</returns>
         Image downloadEpisode(int episodeId)
         {
             try
@@ -87,6 +98,12 @@ namespace First_Comic_Project.Operations
             return null;
         }
 
+        /// <summary>
+        /// Separate and export the panels of an episode.
+        /// </summary>
+        /// <param name="episodeId"></param>
+        /// <param name="episode"></param>
+        /// <param name="separatorSelector"></param>
         void separatePanels(int episodeId, Image episode, SeparatorSelection separatorSelector)
         {
             try
@@ -114,6 +131,11 @@ namespace First_Comic_Project.Operations
             }
         }
 
+        /// <summary>
+        /// Process bulk episodes.
+        /// </summary>
+        /// <param name="episodes"></param>
+        /// <param name="separatorSelector"></param>
         void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
         {
             // Create snapshost
