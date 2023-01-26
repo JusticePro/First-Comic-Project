@@ -1,7 +1,4 @@
-﻿using First_Comic_Project.Controls.Episode;
-using First_Comic_Project.Operations;
-using First_Comic_Project.Operations.Selectors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,115 +19,206 @@ namespace First_Comic_Project
     {
         OpenFileDialog open = new OpenFileDialog();
         public static Form1 instance;
-        private OperationManager operationManager;
-
-        public UserControl episodeSelection;
 
         public Form1()
         {
             InitializeComponent();
             instance = this;
-
-            // Setup Operation Manager
-            this.operationManager = new OperationManager(this);
-
-            operationManager.onProgressUpdate += onProgressUpdate;
-            operationManager.onComplete += onComplete;
         }
 
-        /// <summary>
-        /// Event triggered by OperationManager when progress is made.
-        /// </summary>
-        private void onProgressUpdate(object sender, OperationManager.ProgressUpdateArgs eventArgs)
+        private void button1_Click(object sender, EventArgs e)
         {
-            labelProgress.Text = eventArgs.label;
-            progressBar.Maximum = eventArgs.progressMaximum;
-            progressBar.Value = eventArgs.progressStatus;
-        }
+            Cursor = Cursors.WaitCursor;
+            Image image = Gatherer.getComic((int)episodeIdSelector.Value);
+            image.Save(Path.Combine(getExportPath(), "Episode " + episodeIdSelector.Value + ".png"));
 
-        /// <summary>
-        /// Event triggered by OperationManager when the operation is complete.
-        /// </summary>
-        private void onComplete(object sender, EventArgs eventArgs)
-        {
-            // Reset Progress Indicators
-            progressBar.Value = 0;
-            labelProgress.Text = "";
-
-            buttonStart.Enabled = true;
+            SystemSounds.Beep.Play();
             Cursor = Cursors.Default;
+            //saveImage(image);
+        }
 
+        void saveImage(Image image)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "PNG File (*.png)|*.png";
+
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                image.Save(save.FileName);
+            }
+        }
+
+        string getExportFolder()
+        {
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            folder.SelectedPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            folder.Description = "Export Folder";
+
+            if (folder.ShowDialog() == DialogResult.OK)
+            {
+                string path = folder.SelectedPath;
+                return path;
+            }
+
+            return null;
+        }
+
+        string getExportPath()
+        {
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Export");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return path;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Process.Start(Gatherer.webtoonURLPrefix + episodeIdSelector.Value);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            open.Filter = "PNG File (*.png)|*.png";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = open.FileName;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                colorSelector.BackColor = colorDialog1.Color;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(textBox1.Text))
+            {
+                MessageBox.Show("Select a path to the episode first.");
+                return;
+            }
+
+            Cursor = Cursors.WaitCursor;
+
+            // Get and save panels.
+            List<Image> images = Separator.separatePanels(Image.FromFile(textBox1.Text), colorDialog1.Color);
+            for (int i = 0; i < images.Count; i++)
+            {
+                Image image = images[i];
+                image.Save(Path.Combine(getExportPath(), "Panel " + i + ".png"));
+            }
+
+            Cursor = Cursors.Default;
             SystemSounds.Beep.Play();
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            startOperation();
-        }
-
-        /// <summary>
-        /// Start any type of operation.
-        /// </summary>
-        void startOperation()
-        {
-            IEnumerable<int> episodes = ((EpisodeSelection)episodeSelection).getEpisodes();
-
-            // Episodes may be null if there was an issue in its selection.
-            if (episodes != null)
+            if (spinnerEpisodeStart.Value > spinnerEpisodeEnd.Value)
             {
-                // Make graphical changes.
-                Cursor = Cursors.WaitCursor;
-                buttonStart.Enabled = false;
-                progressBar.Maximum = episodes.Count();
-
-                // Start operation.
-                operationManager.startOperation(episodes, new WhitespaceSelector());
+                MessageBox.Show("The start episode is higher than the end episode.");
+                return;
             }
 
+            Cursor = Cursors.WaitCursor;
+            buttonProcessBulk.Enabled = false;
+
+            int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
+            progressBar.Maximum = episodeQuantity+1;
+
+            Thread thread = new Thread(new ThreadStart(processBulk));
+            thread.Start();
+
         }
 
-        void setEpisodeControl(UserControl control)
+        void setLabel(string text)
         {
-            if (!(control is EpisodeSelection))
+            BeginInvoke((MethodInvoker)delegate ()
             {
-                throw new Exception("Control is not an episode selection.");
+                labelProgress.Text = text;
+            });
+        }
+
+        void processBulk()
+        {
+            int episodeQuantity = (int)spinnerEpisodeEnd.Value - (int)spinnerEpisodeStart.Value;
+
+            // For each episode
+            for (int i = (int)spinnerEpisodeStart.Value; i <= spinnerEpisodeEnd.Value; i++)
+            {
+                try
+                {
+                    setLabel("Gathering Episode #" + i);
+
+                    Image episode = Gatherer.getComic(i);
+
+                    if (episode == null)
+                    {
+                        continue;
+                    }
+
+                    episode.Save(Path.Combine(getExportPath(), "Episode #" + i + ".png"));
+
+                    if (checkBoxSeparate.Checked)
+                    {
+                        setLabel("Separating the panels for Episode #" + i);
+
+                        string episodeDirectory = Path.Combine(getExportPath(), "Episode #" + i);
+
+                        if (!Directory.Exists(episodeDirectory))
+                        {
+                            Directory.CreateDirectory(episodeDirectory);
+                        }
+
+                        //Separator.separateAndExportPanels(episode, colorDialog1.Color, Path.Combine(episodeDirectory, "Panel #{id}.png"));
+
+                        List<Image> images = Separator.separatePanels(episode, colorDialog1.Color);
+
+                        int x = 0;
+                        foreach (Image panel in images)
+                        {
+                            panel.Save(Path.Combine(episodeDirectory, "Panel #" + x + ".png"));
+                            panel.Dispose();
+                            x++;
+                        }
+                        episode.Dispose();
+                    }
+
+                    BeginInvoke((MethodInvoker)delegate ()
+                    {
+                        progressBar.Value++;
+                    });
+                }catch (Exception e)
+                {
+                    string episodeDirectory = Path.Combine(getExportPath(), "Episode #" + i);
+
+                    if (!Directory.Exists(episodeDirectory))
+                    {
+                        Directory.CreateDirectory(episodeDirectory);
+                    }
+                }
             }
 
-            // If an item is present, remove it.
-            if (episodeSelection != null)
+            BeginInvoke((MethodInvoker)delegate ()
             {
-                gatheringGroupBox.Controls.Remove(episodeSelection);
-            }
+                progressBar.Value = 0;
 
-            gatheringGroupBox.Controls.Add(control);
-            control.Location = new Point(3, 43);
+                buttonProcessBulk.Enabled = true;
+                Cursor = Cursors.Default;
+            });
+            setLabel("");
 
-            episodeSelection = control;
-        }
-
-        private void episodeSelectionMode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (episodeSelectionMode.SelectedIndex)
-            {
-                case 0:
-                    setEpisodeControl(new ControlRange());
-                    break;
-
-                case 1:
-                    setEpisodeControl(new ControlSingle());
-                    break;
-            }
-        }
-
-        void setupGatheringBox()
-        {
-            episodeSelectionMode.SelectedIndex = 0;
-            setEpisodeControl(new ControlRange());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            setupGatheringBox();
+            SystemSounds.Beep.Play();
+            Process.Start(getExportPath());
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using First_Comic_Project.Operations.Selectors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace First_Comic_Project.Operations
+namespace First_Comic_Project
 {
     class Separator
     {
@@ -16,9 +15,9 @@ namespace First_Comic_Project.Operations
         /// Separates the panels of a comic strip.
         /// </summary>
         /// <param name="color">The color of the whitespace to cut out.</param>
-        public static List<Image> separatePanels(Image image, SeparatorSelection seperatorSelector)
+        public static List<Image> separatePanels(Image image, Color whitespace)
         {
-            List<int[]> regions = getRegions(image, seperatorSelector);
+            List<int[]> regions = getRegions(image, whitespace);
             List<Image> images = new List<Image>();
 
             foreach (int[] region in regions)
@@ -63,7 +62,7 @@ namespace First_Comic_Project.Operations
         /// </summary>
         /// <param name="image"></param>
         /// <returns>A list of two int arrays. The first int is the start of the region. The second is the end of the region.</returns>
-        static List<int[]> getRegions(Image image, SeparatorSelection separatorSelector)
+        static List<int[]> getRegions(Image image, Color whitespace)
         {
             List<int[]> regions = new List<int[]>();
             Bitmap map = new Bitmap(image);
@@ -79,7 +78,7 @@ namespace First_Comic_Project.Operations
                 for (int x = 0; x < image.Width; x++)
                 {
                     // Is the pixel not whitespace?
-                    if (!separatorSelector.isWhitespace(map.GetPixel(x, y)))
+                    if (!isWhitespace(map.GetPixel(x, y), whitespace))
                     {
                         isEmpty = false; // Then the row isn't empty.
                         break; // End scanning the row.
@@ -112,6 +111,43 @@ namespace First_Comic_Project.Operations
             }
 
             return regions;
+        }
+
+        static bool isWhitespace(Color color, Color whitespace)
+        {
+            // Is checking dark.
+            if (Form1.instance.darkBox.Checked)
+            {
+                int darkCeiling = (int)Form1.instance.darkSpinner.Value;
+                if (color.R <= darkCeiling && color.G <= darkCeiling && color.B <= darkCeiling)
+                    return true;
+            }
+            return isEqual(color, whitespace);
+        }
+
+        static bool isEqual(Color color1, Color color2)
+        {
+            if (color1.A != color2.A)
+            {
+                return false;
+            }
+
+            if (color1.R != color2.R)
+            {
+                return false;
+            }
+
+            if (color1.G != color2.G)
+            {
+                return false;
+            }
+
+            if (color1.B != color2.B)
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }
