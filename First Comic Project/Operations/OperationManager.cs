@@ -48,15 +48,49 @@ namespace First_Comic_Project.Operations
 
         Image downloadEpisode(int episodeId)
         {
-            Image episode = Gatherer.getComic(episodeId);
+            try
+            {
+                Image episode = Gatherer.getComic(episodeId);
 
-            if (episode == null)
+                if (episode == null)
+                {
+                    return null;
+                }
+
+                episode.Save(Path.Combine(getExportPath(), "Episode #" + episodeId + ".png"));
+                return episode;
+            }catch (Exception e)
             {
                 return null;
             }
+            return null;
+        }
 
-            episode.Save(Path.Combine(getExportPath(), "Episode #" + episodeId + ".png"));
-            return episode;
+        void separatePanels(int episodeId, Image episode, SeparatorSelection separatorSelector)
+        {
+            try
+            {
+                string episodeDirectory = Path.Combine(getExportPath(), "Episode #" + episodeId);
+
+                if (!Directory.Exists(episodeDirectory))
+                {
+                    Directory.CreateDirectory(episodeDirectory);
+                }
+
+                List<Image> images = Separator.separatePanels(episode, separatorSelector);
+
+                int x = 0;
+                foreach (Image panel in images)
+                {
+                    panel.Save(Path.Combine(episodeDirectory, "Panel #" + x + ".png"));
+                    panel.Dispose();
+                    x++;
+                }
+                episode.Dispose();
+            }catch (Exception e)
+            {
+                Debug.WriteLine("Failed to separate episode " + episodeId + ": " + e.StackTrace);
+            }
         }
 
         void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
@@ -65,52 +99,21 @@ namespace First_Comic_Project.Operations
             // For each episode
             foreach (int i in episodes)
             {
-                try
+                setLabel("Gathering Episode #" + i);
+                Image episode = downloadEpisode(i);
+
+                // If the selector is null, then you don't separate.
+                if (separatorSelector != null)
                 {
-                    setLabel("Gathering Episode #" + i);
-                    Image episode = downloadEpisode(i);
+                    setLabel("Separating the panels for Episode #" + i);
 
-                    // If the selector is null, then you don't separate.
-                    if (separatorSelector != null)
-                    {
-                        setLabel("Separating the panels for Episode #" + i);
-
-                        string episodeDirectory = Path.Combine(getExportPath(), "Episode #" + i);
-
-                        if (!Directory.Exists(episodeDirectory))
-                        {
-                            Directory.CreateDirectory(episodeDirectory);
-                        }
-
-                        //Separator.separateAndExportPanels(episode, colorDialog1.Color, Path.Combine(episodeDirectory, "Panel #{id}.png"));
-
-                        List<Image> images = Separator.separatePanels(episode, separatorSelector);
-
-                        int x = 0;
-                        foreach (Image panel in images)
-                        {
-                            panel.Save(Path.Combine(episodeDirectory, "Panel #" + x + ".png"));
-                            panel.Dispose();
-                            x++;
-                        }
-                        episode.Dispose();
-                    }
-
-                    BeginInvoke((MethodInvoker)delegate ()
-                    {
-                        progressBar.Value++;
-                    });
+                    separatePanels(i, episode, separatorSelector);
                 }
-                catch (Exception e)
+
+                BeginInvoke((MethodInvoker)delegate ()
                 {
-                    string episodeDirectory = Path.Combine(getExportPath(), "Episode #" + i);
-
-                    if (!Directory.Exists(episodeDirectory))
-                    {
-                        Directory.CreateDirectory(episodeDirectory);
-                    }
-                    Debug.WriteLine("Failed episode " + i + ": " + e.StackTrace);
-                }
+                    progressBar.Value++;
+                });
             }
 
             BeginInvoke((MethodInvoker)delegate ()
@@ -123,6 +126,8 @@ namespace First_Comic_Project.Operations
             setLabel("");
 
             SystemSounds.Beep.Play();
+
+            // Open Folder
             Process.Start(getExportPath());
         }
     }
