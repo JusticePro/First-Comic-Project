@@ -143,6 +143,8 @@ namespace First_Comic_Project.Operations
 
             // Graphic update.
             form.BeginInvoke(new MethodInvoker(() => complete?.Invoke(this, EventArgs.Empty)));
+
+            // Open Folder
             Process.Start(getExportPath());
         }
 
