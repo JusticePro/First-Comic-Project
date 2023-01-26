@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace First_Comic_Project
+namespace First_Comic_Project.Operations
 {
     class Separator
     {
