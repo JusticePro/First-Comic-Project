@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Operations\Gatherer.cs" />
     <Compile Include="Operations\OperationManager.cs" />
+    <Compile Include="Operations\Selectors\SeparatorSelection.cs" />
     <Compile Include="PanelCallback.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using First_Comic_Project.Operations.Selectors;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,9 +21,9 @@ namespace First_Comic_Project.Operations
             this.form = form;
         }
 
-        public void startOperation(IEnumerable<int> episodes, bool doSeparate)
+        public void startOperation(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
         {
-            Thread thread = new Thread(new ThreadStart(() => processBulk(episodes, doSeparate)));
+            Thread thread = new Thread(new ThreadStart(() => processBulk(episodes, separatorSelector)));
             thread.Start();
         }
 
@@ -57,7 +59,7 @@ namespace First_Comic_Project.Operations
             return episode;
         }
 
-        void processBulk(IEnumerable<int> episodes, bool doSeparate)
+        void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
         {
 
             // For each episode
@@ -68,7 +70,8 @@ namespace First_Comic_Project.Operations
                     setLabel("Gathering Episode #" + i);
                     Image episode = downloadEpisode(i);
 
-                    if (doSeparate)
+                    // If the selector is null, then you don't separate.
+                    if (separatorSelector != null)
                     {
                         setLabel("Separating the panels for Episode #" + i);
 
@@ -81,7 +84,7 @@ namespace First_Comic_Project.Operations
 
                         //Separator.separateAndExportPanels(episode, colorDialog1.Color, Path.Combine(episodeDirectory, "Panel #{id}.png"));
 
-                        List<Image> images = Separator.separatePanels(episode, colorDialog1.Color);
+                        List<Image> images = Separator.separatePanels(episode, separatorSelector);
 
                         int x = 0;
                         foreach (Image panel in images)
