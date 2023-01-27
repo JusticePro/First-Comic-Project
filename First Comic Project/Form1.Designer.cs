@@ -30,7 +30,6 @@ namespace First_Comic_Project
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.gatheringGroupBox = new System.Windows.Forms.GroupBox();
             this.episodeSelectionMode = new System.Windows.Forms.ComboBox();
             this.urlBox = new System.Windows.Forms.TextBox();
@@ -43,14 +42,11 @@ namespace First_Comic_Project
             this.darkBox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.labelProgress = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.gatheringGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.darkSpinner)).BeginInit();
             this.SuspendLayout();
-            // 
-            // colorDialog1
-            // 
-            this.colorDialog1.Color = System.Drawing.Color.White;
             // 
             // gatheringGroupBox
             // 
@@ -167,6 +163,10 @@ namespace First_Comic_Project
             this.labelProgress.Size = new System.Drawing.Size(0, 13);
             this.labelProgress.TabIndex = 17;
             // 
+            // colorDialog1
+            // 
+            this.colorDialog1.Color = System.Drawing.Color.White;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,7 +195,6 @@ namespace First_Comic_Project
         }
 
         #endregion
-        private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.GroupBox gatheringGroupBox;
         public System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.CheckBox checkBoxSeparate;
@@ -208,6 +207,7 @@ namespace First_Comic_Project
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.ComboBox episodeSelectionMode;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 

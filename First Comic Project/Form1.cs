@@ -126,15 +126,9 @@ namespace First_Comic_Project
             }
         }
 
-        void setupGatheringBox()
-        {
-            episodeSelectionMode.SelectedIndex = 0;
-            setEpisodeControl(new ControlSingle());
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            setupGatheringBox();
+            
         }
     }
 }
