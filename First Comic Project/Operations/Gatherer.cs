@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace First_Comic_Project
+namespace First_Comic_Project.Operations
 {
     public class Gatherer
     {

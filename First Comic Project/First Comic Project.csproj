@@ -61,7 +61,7 @@
     <Compile Include="Controls\Episode\ControlSingle.Designer.cs">
       <DependentUpon>ControlSingle.cs</DependentUpon>
     </Compile>
-    <Compile Include="EpisodeSelection.cs" />
+    <Compile Include="Operations\Selectors\EpisodeSelection.cs" />
     <Compile Include="Controls\Episode\ControlRange.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -74,14 +74,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gatherer.cs" />
+    <Compile Include="Operations\Gatherer.cs" />
+    <Compile Include="Operations\OperationManager.cs" />
+    <Compile Include="Operations\Selectors\SeparatorSelection.cs" />
+    <Compile Include="Operations\Selectors\WhitespaceSelector.cs" />
     <Compile Include="PanelCallback.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Separator.cs" />
-    <EmbeddedResource Include="Controls\Episode\ControlList.resx">
-      <DependentUpon>ControlList.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Operations\Separator.cs" />
     <EmbeddedResource Include="Controls\Episode\ControlRange.resx">
       <DependentUpon>ControlRange.cs</DependentUpon>
     </EmbeddedResource>
