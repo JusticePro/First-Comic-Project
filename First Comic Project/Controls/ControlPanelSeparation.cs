@@ -74,6 +74,10 @@ namespace First_Comic_Project.Controls
                 case 1:
                     setSeparatorControl(new ControlStatic());
                     break;
+
+                case 2:
+                    setSeparatorControl(new ControlBrightness());
+                    break;
             }
         }
     }
