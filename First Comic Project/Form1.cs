@@ -169,11 +169,15 @@ namespace First_Comic_Project
             switch (episodeSelectionMode.SelectedIndex)
             {
                 case 0:
-                    setEpisodeControl(new ControlRange());
+                    setEpisodeControl(new ControlSingle());
                     break;
 
                 case 1:
-                    setEpisodeControl(new ControlSingle());
+                    setEpisodeControl(new ControlRange());
+                    break;
+
+                case 2:
+                    setEpisodeControl(new ControlList());
                     break;
             }
         }
@@ -181,7 +185,7 @@ namespace First_Comic_Project
         void setupGatheringBox()
         {
             episodeSelectionMode.SelectedIndex = 0;
-            setEpisodeControl(new ControlRange());
+            setEpisodeControl(new ControlSingle());
         }
 
         private void Form1_Load(object sender, EventArgs e)
