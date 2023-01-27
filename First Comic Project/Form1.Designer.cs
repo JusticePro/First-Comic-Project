@@ -67,8 +67,8 @@ namespace First_Comic_Project
             this.episodeSelectionMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.episodeSelectionMode.FormattingEnabled = true;
             this.episodeSelectionMode.Items.AddRange(new object[] {
-            "Range",
             "Single",
+            "Range",
             "List"});
             this.episodeSelectionMode.Location = new System.Drawing.Point(6, 16);
             this.episodeSelectionMode.Name = "episodeSelectionMode";
