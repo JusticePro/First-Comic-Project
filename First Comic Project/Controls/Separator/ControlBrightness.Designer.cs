@@ -50,11 +50,6 @@ namespace First_Comic_Project.Controls.Separator
             // 
             // spinnerCeiling
             // 
-            this.spinnerCeiling.Increment = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
             this.spinnerCeiling.Location = new System.Drawing.Point(111, 40);
             this.spinnerCeiling.Maximum = new decimal(new int[] {
             255,
@@ -67,11 +62,6 @@ namespace First_Comic_Project.Controls.Separator
             // 
             // spinnerFloor
             // 
-            this.spinnerFloor.Increment = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
             this.spinnerFloor.Location = new System.Drawing.Point(111, 66);
             this.spinnerFloor.Maximum = new decimal(new int[] {
             255,
