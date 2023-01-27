@@ -50,14 +50,34 @@ namespace First_Comic_Project.Controls.Separator
             // 
             // spinnerCeiling
             // 
+            this.spinnerCeiling.Increment = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.spinnerCeiling.Location = new System.Drawing.Point(111, 40);
+            this.spinnerCeiling.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.spinnerCeiling.Name = "spinnerCeiling";
             this.spinnerCeiling.Size = new System.Drawing.Size(120, 20);
             this.spinnerCeiling.TabIndex = 2;
             // 
             // spinnerFloor
             // 
+            this.spinnerFloor.Increment = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.spinnerFloor.Location = new System.Drawing.Point(111, 66);
+            this.spinnerFloor.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
             this.spinnerFloor.Name = "spinnerFloor";
             this.spinnerFloor.Size = new System.Drawing.Size(120, 20);
             this.spinnerFloor.TabIndex = 3;
