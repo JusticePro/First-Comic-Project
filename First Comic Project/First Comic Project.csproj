@@ -56,6 +56,12 @@
     <Compile Include="Controls\ControlPanelGathering.Designer.cs">
       <DependentUpon>ControlPanelGathering.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlPanelSeparation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlPanelSeparation.Designer.cs">
+      <DependentUpon>ControlPanelSeparation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Episode\ControlList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="Operations\Separator.cs" />
     <EmbeddedResource Include="Controls\ControlPanelGathering.resx">
       <DependentUpon>ControlPanelGathering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControlPanelSeparation.resx">
+      <DependentUpon>ControlPanelSeparation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Episode\ControlRange.resx">
       <DependentUpon>ControlRange.cs</DependentUpon>
