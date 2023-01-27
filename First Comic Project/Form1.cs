@@ -82,7 +82,7 @@ namespace First_Comic_Project
                 progressBar.Maximum = episodes.Count();
 
                 // Start operation.
-                operationManager.startOperation(episodes, new WhitespaceSelector());
+                operationManager.startOperation(episodes, controlPanelSeparator.getSelector());
             }
 
         }

@@ -1,4 +1,5 @@
-﻿using First_Comic_Project.Operations.Selectors;
+﻿using First_Comic_Project.Controls.Separator;
+using First_Comic_Project.Operations.Selectors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,6 +69,10 @@ namespace First_Comic_Project.Controls
             {
                 case 0:
                     setSeparatorControl(null);
+                    break;
+
+                case 1:
+                    setSeparatorControl(new ControlStatic());
                     break;
             }
         }
