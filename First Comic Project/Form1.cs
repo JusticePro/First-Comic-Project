@@ -75,7 +75,7 @@ namespace First_Comic_Project
             SeparatorSelection selector = controlPanelSeparator.getSelector();
 
             // If the selector isn't filled right, cancel.
-            if (!selector.validate())
+            if (selector != null && !selector.validate())
                 return;
 
             // Episodes may be null if there was an issue in its selection.
