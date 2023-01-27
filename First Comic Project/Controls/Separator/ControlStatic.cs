@@ -29,6 +29,11 @@ namespace First_Comic_Project.Controls.Separator
             return SeparatorUtils.isEqual(staticColor, color);
         }
 
+        public bool validate()
+        {
+            return true;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)

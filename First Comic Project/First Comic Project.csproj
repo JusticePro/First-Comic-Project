@@ -74,6 +74,12 @@
     <Compile Include="Controls\Episode\ControlSingle.Designer.cs">
       <DependentUpon>ControlSingle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Separator\ControlBrightness.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Separator\ControlBrightness.Designer.cs">
+      <DependentUpon>ControlBrightness.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Separator\ControlStatic.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Episode\ControlSingle.resx">
       <DependentUpon>ControlSingle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Separator\ControlBrightness.resx">
+      <DependentUpon>ControlBrightness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Separator\ControlStatic.resx">
       <DependentUpon>ControlStatic.cs</DependentUpon>
