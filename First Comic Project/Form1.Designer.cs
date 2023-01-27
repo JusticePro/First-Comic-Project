@@ -30,9 +30,6 @@ namespace First_Comic_Project
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.gatheringGroupBox = new System.Windows.Forms.GroupBox();
-            this.episodeSelectionMode = new System.Windows.Forms.ComboBox();
             this.urlBox = new System.Windows.Forms.TextBox();
             this.checkBoxSeparate = new System.Windows.Forms.CheckBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -43,38 +40,11 @@ namespace First_Comic_Project
             this.darkBox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.labelProgress = new System.Windows.Forms.Label();
-            this.gatheringGroupBox.SuspendLayout();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.controlPanelGathering = new First_Comic_Project.Controls.ControlPanelGathering();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.darkSpinner)).BeginInit();
             this.SuspendLayout();
-            // 
-            // colorDialog1
-            // 
-            this.colorDialog1.Color = System.Drawing.Color.White;
-            // 
-            // gatheringGroupBox
-            // 
-            this.gatheringGroupBox.Controls.Add(this.episodeSelectionMode);
-            this.gatheringGroupBox.Location = new System.Drawing.Point(12, 35);
-            this.gatheringGroupBox.Name = "gatheringGroupBox";
-            this.gatheringGroupBox.Size = new System.Drawing.Size(546, 163);
-            this.gatheringGroupBox.TabIndex = 10;
-            this.gatheringGroupBox.TabStop = false;
-            this.gatheringGroupBox.Text = "Panel Gathering";
-            // 
-            // episodeSelectionMode
-            // 
-            this.episodeSelectionMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.episodeSelectionMode.FormattingEnabled = true;
-            this.episodeSelectionMode.Items.AddRange(new object[] {
-            "Single",
-            "Range",
-            "List"});
-            this.episodeSelectionMode.Location = new System.Drawing.Point(6, 16);
-            this.episodeSelectionMode.Name = "episodeSelectionMode";
-            this.episodeSelectionMode.Size = new System.Drawing.Size(534, 21);
-            this.episodeSelectionMode.TabIndex = 11;
-            this.episodeSelectionMode.SelectedIndexChanged += new System.EventHandler(this.episodeSelectionMode_SelectedIndexChanged);
             // 
             // urlBox
             // 
@@ -167,25 +137,34 @@ namespace First_Comic_Project
             this.labelProgress.Size = new System.Drawing.Size(0, 13);
             this.labelProgress.TabIndex = 17;
             // 
+            // colorDialog1
+            // 
+            this.colorDialog1.Color = System.Drawing.Color.White;
+            // 
+            // controlPanelGathering
+            // 
+            this.controlPanelGathering.Location = new System.Drawing.Point(12, 32);
+            this.controlPanelGathering.Name = "controlPanelGathering";
+            this.controlPanelGathering.Size = new System.Drawing.Size(546, 166);
+            this.controlPanelGathering.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 478);
+            this.Controls.Add(this.controlPanelGathering);
             this.Controls.Add(this.labelProgress);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.urlBox);
-            this.Controls.Add(this.gatheringGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "First Comic Project 1.1.0 (Beta)";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.gatheringGroupBox.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.darkSpinner)).EndInit();
@@ -195,8 +174,6 @@ namespace First_Comic_Project
         }
 
         #endregion
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.GroupBox gatheringGroupBox;
         public System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.CheckBox checkBoxSeparate;
         private System.Windows.Forms.ProgressBar progressBar;
@@ -207,7 +184,8 @@ namespace First_Comic_Project
         public System.Windows.Forms.CheckBox darkBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelProgress;
-        private System.Windows.Forms.ComboBox episodeSelectionMode;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private Controls.ControlPanelGathering controlPanelGathering;
     }
 }
 

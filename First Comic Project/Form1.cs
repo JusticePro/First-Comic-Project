@@ -24,8 +24,6 @@ namespace First_Comic_Project
         public static Form1 instance;
         private OperationManager operationManager;
 
-        public UserControl episodeSelection;
-
         public Form1()
         {
             InitializeComponent();
@@ -73,7 +71,7 @@ namespace First_Comic_Project
         /// </summary>
         void startOperation()
         {
-            IEnumerable<int> episodes = ((EpisodeSelection)episodeSelection).getEpisodes();
+            IEnumerable<int> episodes = controlPanelGathering.getEpisodes();
 
             // Episodes may be null if there was an issue in its selection.
             if (episodes != null)
@@ -89,52 +87,5 @@ namespace First_Comic_Project
 
         }
 
-        void setEpisodeControl(UserControl control)
-        {
-            if (!(control is EpisodeSelection))
-            {
-                throw new Exception("Control is not an episode selection.");
-            }
-
-            // If an item is present, remove it.
-            if (episodeSelection != null)
-            {
-                gatheringGroupBox.Controls.Remove(episodeSelection);
-            }
-
-            gatheringGroupBox.Controls.Add(control);
-            control.Location = new Point(3, 43);
-
-            episodeSelection = control;
-        }
-
-        private void episodeSelectionMode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (episodeSelectionMode.SelectedIndex)
-            {
-                case 0:
-                    setEpisodeControl(new ControlSingle());
-                    break;
-
-                case 1:
-                    setEpisodeControl(new ControlRange());
-                    break;
-
-                case 2:
-                    setEpisodeControl(new ControlList());
-                    break;
-            }
-        }
-
-        void setupGatheringBox()
-        {
-            episodeSelectionMode.SelectedIndex = 0;
-            setEpisodeControl(new ControlSingle());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            setupGatheringBox();
-        }
     }
 }
