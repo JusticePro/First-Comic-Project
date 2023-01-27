@@ -145,20 +145,21 @@ namespace First_Comic_Project.Operations
             int episodeCount = episodes.Count();
 
             // For each episode
-            foreach (int i in episodes)
+            for (int i = 0; i < episodeCount; i++)
             {
+                int episodeId = episodes.ElementAt(i);
                 // Graphic update.
-                form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Gathering Episode #" + i, i, episodeCount))));
+                form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Gathering Episode #" + episodeId, i, episodeCount))));
 
-                Image episode = downloadEpisode(i);
+                Image episode = downloadEpisode(episodeId);
 
                 // If the selector is null, then you don't separate.
                 if (separatorSelector != null)
                 {
                     // Graphic update.
-                    form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Separating the panels for Episode #" + i, i, episodeCount))));
+                    form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Separating the panels for Episode #" + episodeId, i, episodeCount))));
 
-                    separatePanels(i, episode, separatorSelector);
+                    separatePanels(episodeId, episode, separatorSelector);
                 }
 
             }
