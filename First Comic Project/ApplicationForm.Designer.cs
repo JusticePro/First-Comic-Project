@@ -60,7 +60,7 @@ namespace First_Comic_Project
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(552, 23);
             this.buttonStart.TabIndex = 14;
-            this.buttonStart.Text = "Process Bulk Gathering";
+            this.buttonStart.Text = "Start Operation";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
