@@ -111,7 +111,7 @@ namespace First_Comic_Project
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ApplicationForm";
-            this.Text = "First Comic Project 1.1.0 (Beta)";
+            this.Text = "First Comic Project 1.1.0";
             this.ResumeLayout(false);
             this.PerformLayout();
 
