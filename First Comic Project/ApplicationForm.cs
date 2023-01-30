@@ -88,7 +88,7 @@ namespace First_Comic_Project
 
                 // Start operation.
 
-                operationManager.startOperation(episodes, selector);
+                operationManager.startOperation(episodes, selector, controlPanelSeparator.autotrim);
             }
 
         }

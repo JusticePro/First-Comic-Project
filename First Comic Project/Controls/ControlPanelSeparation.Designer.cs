@@ -31,7 +31,10 @@ namespace First_Comic_Project.Controls
         {
             this.separatingGroupBox = new System.Windows.Forms.GroupBox();
             this.separatorSelectionMode = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.autotrimSpinner = new System.Windows.Forms.NumericUpDown();
             this.separatingGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autotrimSpinner)).BeginInit();
             this.SuspendLayout();
             // 
             // separatingGroupBox
@@ -58,16 +61,41 @@ namespace First_Comic_Project.Controls
             this.separatorSelectionMode.TabIndex = 13;
             this.separatorSelectionMode.SelectedIndexChanged += new System.EventHandler(this.separatorSelectionMode_SelectedIndexChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 174);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Ignore panels shorter than or equal to:";
+            // 
+            // autotrimSpinner
+            // 
+            this.autotrimSpinner.Location = new System.Drawing.Point(198, 172);
+            this.autotrimSpinner.Name = "autotrimSpinner";
+            this.autotrimSpinner.Size = new System.Drawing.Size(120, 20);
+            this.autotrimSpinner.TabIndex = 2;
+            this.autotrimSpinner.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
             // ControlPanelSeparation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.autotrimSpinner);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.separatingGroupBox);
             this.Name = "ControlPanelSeparation";
-            this.Size = new System.Drawing.Size(561, 177);
+            this.Size = new System.Drawing.Size(561, 208);
             this.Load += new System.EventHandler(this.ControlPanelSeparation_Load);
             this.separatingGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.autotrimSpinner)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -75,5 +103,7 @@ namespace First_Comic_Project.Controls
 
         private System.Windows.Forms.GroupBox separatingGroupBox;
         private System.Windows.Forms.ComboBox separatorSelectionMode;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown autotrimSpinner;
     }
 }

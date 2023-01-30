@@ -16,7 +16,7 @@ namespace First_Comic_Project.Operations
         /// Separates the panels of a comic strip.
         /// </summary>
         /// <param name="color">The color of the whitespace to cut out.</param>
-        public static List<Image> separatePanels(Image image, SeparatorSelection seperatorSelector)
+        public static List<Image> separatePanels(Image image, SeparatorSelection seperatorSelector, int autoTrim)
         {
             List<int[]> regions = getRegions(image, seperatorSelector);
             List<Image> images = new List<Image>();
@@ -26,6 +26,12 @@ namespace First_Comic_Project.Operations
                 Image img = cropImage(image, region[0], region[1]);
 
                 if (img == null)
+                {
+                    continue;
+                }
+
+                // If the height is smaller than or equal to the autotrim size, do not save it.
+                if (img.Height <= autoTrim)
                 {
                     continue;
                 }

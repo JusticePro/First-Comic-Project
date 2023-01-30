@@ -15,6 +15,10 @@ namespace First_Comic_Project.Controls
     public partial class ControlPanelSeparation : UserControl
     {
         private UserControl separator;
+        public int autotrim
+        {
+            get { return (int)autotrimSpinner.Value; }
+        }
 
         public ControlPanelSeparation()
         {

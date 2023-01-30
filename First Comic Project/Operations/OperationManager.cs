@@ -48,9 +48,9 @@ namespace First_Comic_Project.Operations
         /// </summary>
         /// <param name="episodes">List of episodes to process.</param>
         /// <param name="separatorSelector">Standard of whitespace. Null if not separating.</param>
-        public void startOperation(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
+        public void startOperation(IEnumerable<int> episodes, SeparatorSelection separatorSelector, int autotrim)
         {
-            Thread thread = new Thread(new ThreadStart(() => processBulk(episodes, separatorSelector)));
+            Thread thread = new Thread(new ThreadStart(() => processBulk(episodes, separatorSelector, autotrim)));
             thread.Start();
         }
 
@@ -104,7 +104,7 @@ namespace First_Comic_Project.Operations
         /// <param name="episodeId"></param>
         /// <param name="episode"></param>
         /// <param name="separatorSelector"></param>
-        void separatePanels(int episodeId, Image episode, SeparatorSelection separatorSelector)
+        void separatePanels(int episodeId, Image episode, SeparatorSelection separatorSelector, int autotrim)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace First_Comic_Project.Operations
                     Directory.CreateDirectory(episodeDirectory);
                 }
 
-                List<Image> images = Separator.separatePanels(episode, separatorSelector);
+                List<Image> images = Separator.separatePanels(episode, separatorSelector, autotrim);
 
                 int x = 0;
                 foreach (Image panel in images)
@@ -136,7 +136,7 @@ namespace First_Comic_Project.Operations
         /// </summary>
         /// <param name="episodes"></param>
         /// <param name="separatorSelector"></param>
-        void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector)
+        void processBulk(IEnumerable<int> episodes, SeparatorSelection separatorSelector, int autotrim)
         {
             // Create snapshost
             var progressUpdate = onProgressUpdate;
@@ -159,7 +159,7 @@ namespace First_Comic_Project.Operations
                     // Graphic update.
                     form.BeginInvoke(new MethodInvoker(() => progressUpdate?.Invoke(this, new ProgressUpdateArgs("Separating the panels for Episode #" + episodeId, i, episodeCount))));
 
-                    separatePanels(episodeId, episode, separatorSelector);
+                    separatePanels(episodeId, episode, separatorSelector, autotrim);
                 }
 
             }

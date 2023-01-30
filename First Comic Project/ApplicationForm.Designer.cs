@@ -35,8 +35,8 @@ namespace First_Comic_Project
             this.buttonStart = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.labelProgress = new System.Windows.Forms.Label();
-            this.controlPanelGathering = new First_Comic_Project.Controls.ControlPanelGathering();
             this.controlPanelSeparator = new First_Comic_Project.Controls.ControlPanelSeparation();
+            this.controlPanelGathering = new First_Comic_Project.Controls.ControlPanelGathering();
             this.SuspendLayout();
             // 
             // urlBox
@@ -49,14 +49,14 @@ namespace First_Comic_Project
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 393);
+            this.progressBar.Location = new System.Drawing.Point(12, 429);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(552, 23);
             this.progressBar.TabIndex = 13;
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(12, 422);
+            this.buttonStart.Location = new System.Drawing.Point(12, 458);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(552, 23);
             this.buttonStart.TabIndex = 14;
@@ -67,7 +67,7 @@ namespace First_Comic_Project
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(331, 453);
+            this.label4.Location = new System.Drawing.Point(331, 489);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(237, 13);
             this.label4.TabIndex = 16;
@@ -76,10 +76,17 @@ namespace First_Comic_Project
             // labelProgress
             // 
             this.labelProgress.AutoSize = true;
-            this.labelProgress.Location = new System.Drawing.Point(15, 373);
+            this.labelProgress.Location = new System.Drawing.Point(15, 410);
             this.labelProgress.Name = "labelProgress";
             this.labelProgress.Size = new System.Drawing.Size(0, 13);
             this.labelProgress.TabIndex = 17;
+            // 
+            // controlPanelSeparator
+            // 
+            this.controlPanelSeparator.Location = new System.Drawing.Point(12, 204);
+            this.controlPanelSeparator.Name = "controlPanelSeparator";
+            this.controlPanelSeparator.Size = new System.Drawing.Size(546, 203);
+            this.controlPanelSeparator.TabIndex = 19;
             // 
             // controlPanelGathering
             // 
@@ -88,18 +95,11 @@ namespace First_Comic_Project
             this.controlPanelGathering.Size = new System.Drawing.Size(546, 166);
             this.controlPanelGathering.TabIndex = 18;
             // 
-            // controlPanelSeparator
-            // 
-            this.controlPanelSeparator.Location = new System.Drawing.Point(12, 204);
-            this.controlPanelSeparator.Name = "controlPanelSeparator";
-            this.controlPanelSeparator.Size = new System.Drawing.Size(546, 166);
-            this.controlPanelSeparator.TabIndex = 19;
-            // 
-            // Form1
+            // ApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 478);
+            this.ClientSize = new System.Drawing.Size(576, 507);
             this.Controls.Add(this.controlPanelSeparator);
             this.Controls.Add(this.controlPanelGathering);
             this.Controls.Add(this.labelProgress);
@@ -110,7 +110,7 @@ namespace First_Comic_Project
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "ApplicationForm";
             this.Text = "First Comic Project 1.1.0 (Beta)";
             this.ResumeLayout(false);
             this.PerformLayout();
