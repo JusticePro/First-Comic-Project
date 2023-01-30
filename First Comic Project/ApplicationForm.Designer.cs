@@ -1,7 +1,7 @@
 ﻿
 namespace First_Comic_Project
 {
-    partial class Form1
+    partial class ApplicationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace First_Comic_Project
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicationForm));
             this.urlBox = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.buttonStart = new System.Windows.Forms.Button();

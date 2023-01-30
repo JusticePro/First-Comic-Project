@@ -23,7 +23,7 @@ namespace First_Comic_Project.Operations
         {
             get
             {
-                return Form1.instance.urlBox.Text;
+                return ApplicationForm.instance.urlBox.Text;
             }
         }
 

@@ -18,13 +18,13 @@ using System.Windows.Forms;
 
 namespace First_Comic_Project
 {
-    public partial class Form1 : Form
+    public partial class ApplicationForm : System.Windows.Forms.Form
     {
         OpenFileDialog open = new OpenFileDialog();
-        public static Form1 instance;
+        public static ApplicationForm instance;
         private OperationManager operationManager;
 
-        public Form1()
+        public ApplicationForm()
         {
             InitializeComponent();
             instance = this;

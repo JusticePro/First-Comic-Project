@@ -36,9 +36,9 @@ namespace First_Comic_Project.Operations
         public event EventHandler<EventArgs> onComplete;
 
         // Form
-        private Form1 form;
+        private ApplicationForm form;
 
-        public OperationManager(Form1 form)
+        public OperationManager(ApplicationForm form)
         {
             this.form = form;
         }
