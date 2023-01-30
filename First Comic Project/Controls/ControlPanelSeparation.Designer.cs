@@ -51,8 +51,7 @@ namespace First_Comic_Project.Controls
             this.separatorSelectionMode.Items.AddRange(new object[] {
             "Off",
             "Static Color",
-            "Brightness",
-            "Low-Detection"});
+            "Brightness"});
             this.separatorSelectionMode.Location = new System.Drawing.Point(6, 19);
             this.separatorSelectionMode.Name = "separatorSelectionMode";
             this.separatorSelectionMode.Size = new System.Drawing.Size(534, 21);
