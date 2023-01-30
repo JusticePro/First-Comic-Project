@@ -72,6 +72,11 @@ namespace First_Comic_Project
         void startOperation()
         {
             IEnumerable<int> episodes = controlPanelGathering.getEpisodes();
+            SeparatorSelection selector = controlPanelSeparator.getSelector();
+
+            // If the selector isn't filled right, cancel.
+            if (selector != null && !selector.validate())
+                return;
 
             // Episodes may be null if there was an issue in its selection.
             if (episodes != null)
@@ -82,7 +87,8 @@ namespace First_Comic_Project
                 progressBar.Maximum = episodes.Count();
 
                 // Start operation.
-                operationManager.startOperation(episodes, new WhitespaceSelector());
+
+                operationManager.startOperation(episodes, selector);
             }
 
         }
